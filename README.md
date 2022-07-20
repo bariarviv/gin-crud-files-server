@@ -1,38 +1,69 @@
-# Gofiber - CRUD Server
+# GoGin - CRUD Server
 ![Coverage](https://img.shields.io/badge/Coverage-71.2%25-brightgreen)
-![Go](https://github.com/bariarviv/.........../workflows/CI/badge.svg)
+![Go](https://github.com/bariarviv/gin-crud-server/workflows/CI/badge.svg)
+
 
 ## Gin Golang
-[Gin](https://github.com/gin-gonic/gin) is a web framework written in Go (Golang). It features a martini-like API with performance that is up to 40 times faster thanks to httprouter.
+[Gin](https://github.com/gin-gonic/gin) is a web framework written in Go (Golang). It features a martini-like API with performance that is up to 40 times faster thanks to httprouter
+
+### Advantages:
+1. Simple code - can save the developer a lot of time in large projects
+2. High performance
+3. Error management
+4. Easy JSON authentication
+5. Gin has a mode test
+
+### Disadvantages:
+1. Not flexible in development
+2. Can add more complexity to your project and slow down the development time, the infrastructure now depends on the package that other people maintain
+
+### Alternative Solutions:
+1. [net/http:](https://github.com/golang/go) it's easier to use and can handle more cases
+2. [fasthttp:](https://github.com/valyala/fasthttp) was designed for some high-performance edge cases
+3. [echo:](https://github.com/labstack/echo) supports HTTP/2 for faster performance and an overall better user experience and has automatic TLS certificates
+4. [fiber:](https://github.com/gofiber/fiber) built on top of the Fasthttp HTTP engine for Go, which is the fastest HTTP engine for Go
+
 
 ## Details of the application
 Backend Golang application that has the following routes (using gin):
-* PUT /files - uploads a file.
-* GET /files/:fileName - to download the file.
-* GET /files - returns a JSON array with the list of files stored.
-* DELETE /files/:fileName - to delete the file.
+* ***PUT /files -*** uploads a file
+* ***GET /files/:fileName -*** to download the file
+* ***GET /files -*** returns a JSON array with the list of files stored
+* ***DELETE /files/:fileName -*** to delete the file
+
 
 ## Running Steps
-### Step 1 - Install Gin:
+### Step 1 - Build the docker image:
+```
+docker build -t ginserver .
+```
+
+### Step 2 - Run the docker image:
+```
+docker run -it --rm -p 3000:3000 ginserver
+```
+
+#### For example:
+```
+[baria@ ~]$ sudo docker run -it --rm -p 3000:3000 ginserver 
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:   export GIN_MODE=release
+ - using code:  gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /files                    --> main.ListFilesHandler (3 handlers)
+[GIN-debug] GET    /files/:fileName          --> main.DownloadFileHandler (3 handlers)
+[GIN-debug] POST   /files                    --> main.UploadFileHandler (3 handlers)
+[GIN-debug] DELETE /files/:fileName          --> main.DeleteFileHandler (3 handlers)
+[GIN-debug] Listening and serving HTTP on listener what's bind with address@[::]:3000
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN] 2022/07/20 - 04:13:34 | 200 |     237.023µs |      172.17.0.1 | GET      "/files"
+```
 
 
-
-1. To install Gin package, you need to install Go and set your Go workspace first.
-2. The first need Go installed (version 1.13+ is required), then you can use the below Go command to install Gin.
-    ```
-      go get -u github.com/gin-gonic/gin
-    ```
-Step 2 - Running locally:
-To run the server, open a terminal, go to the project folder and use the command:
-    ```
-        go run .
-    ```
-
-[//]: # (Note: If you want to build a new docker image yourself &#40;Dockerfile file attached to the repository&#41; you will need to change the proxy back to: "proxy": "http://server-service:8080",.)
-
-
-# Unit tests output
-
+## Unit Tests Output
 ```bash
 === RUN   Test_makeDirIfNotExists
 === RUN   Test_makeDirIfNotExists/Creates_a_dir_successfully
