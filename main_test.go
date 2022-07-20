@@ -18,6 +18,8 @@ import (
 
 const (
 	TempFile = "temp.txt"
+	KeyFileTest = "ssl.key"
+	CertFileTest = "ssl.crt"
 )
 
 func Test_makeDirIfNotExists(t *testing.T) {
@@ -46,10 +48,10 @@ func Test_createTLSCert(t *testing.T) {
 		port     string
 		wantErr  bool
 	}{
-		{"Creates TLS cert successfully", CertFile, KeyFile, Port, false},
-		{"Failed to create due to empty certFile", "", KeyFile, Port, true},
-		{"Failed to create due to empty keyFile", CertFile, "", Port, true},
-		{"Failed to create due to empty port", CertFile, KeyFile, "", true},
+		{"Creates TLS cert successfully", CertFileTest, KeyFileTest, Port, false},
+		{"Failed to create due to empty certFile", "", KeyFileTest, Port, true},
+		{"Failed to create due to empty keyFile", CertFileTest, "", Port, true},
+		{"Failed to create due to empty port", CertFileTest, KeyFileTest, "", true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -184,7 +186,7 @@ func TestDeleteFileHandler(t *testing.T) {
 
 func Test_setupRouter(t *testing.T) {
 	go func() {
-		if _, err := setupRouter(CertFile, KeyFile, ":3001"); err != nil {
+		if _, err := setupRouter(CertFileTest, KeyFileTest, ":3001"); err != nil {
 			t.Errorf("setupRouter() error = %v", err)
 		}
 	}()
