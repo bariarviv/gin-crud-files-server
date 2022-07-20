@@ -1,7 +1,5 @@
 # GoGin - CRUD Server
 ![Coverage](https://img.shields.io/badge/Coverage-71.2%25-brightgreen)
-![Go](https://github.com/bariarviv/gin-crud-server/workflows/CI/badge.svg)
-
 
 ## Gin Golang
 [Gin](https://github.com/gin-gonic/gin) is a web framework written in Go (Golang). It features a martini-like API with performance that is up to 40 times faster thanks to httprouter
